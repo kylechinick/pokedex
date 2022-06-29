@@ -9,6 +9,7 @@ function getElements(response) {
     $('.showName').text(response.species.name);
     let sprite = document.createElement('img');
     $(sprite).prop('src', response.sprites.front_default);
+    $('.showSprite').html("");
     $('.showSprite').append(sprite);
   } else {
     $('.showErrors').text(`There was an error: ${response}`);
@@ -26,8 +27,6 @@ async function getAllGenMons(genNumber) {
 }
 
 function populateNames(response) {
-  // make dropdown with all 151 gen 1 pokemon
-  // response.pokemon_species
   const pokemonArray = response.pokemon_species;
   const list = $('#pokemons');
   pokemonArray.forEach(function(pokemon) {
@@ -37,11 +36,25 @@ function populateNames(response) {
   });
 }
 
+// Array.prototype.random = function() {
+//   return this[Math.random]
+// }
+function randomMon(response) {
+  const pokemonArray = response.pokemon_species;
+  const list = $('#pokemons');
+    let randomMon = (Math.floor(Math.random()*pokemonArray.length))
+    list.append(pokemonArray[randomMon])
+  };
+
+
+
 $(document).ready(function() {
-  getAllGenMons(1);
-  
+  const srchGenUpTo = 8;
+  for (let i = 1; i <= srchGenUpTo; i++) {
+    getAllGenMons(i);
+  }
   $('#pokemonInfo').on('click', function() {
-    const name = $('#name').val();
+    const name = $('#nameAuto').val();
     getPokeByName(name);
   });
 });

@@ -16,7 +16,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Pokemon',
+      title: 'pokedex',
       template: './src/index.html',
       inject: 'body'
     }),
