@@ -1,0 +1,21 @@
+<html lang="en-US">
+<head>
+  <title>PokeDex Beta</title>
+</head>
+<body>
+  <div class="container">
+    <h1>PokeDex Beta</h1>
+    <label for="name">Enter a name:</label>
+    <input id="name" type="text">
+    <label for="nameAuto">Enter a name(beta):</label>
+    <input list="pokemons" name="pokemon" id="nameAuto" type="text">
+    <datalist id="pokemons">
+    </datalist>
+    <button class="btn-secondary" id="pokemonInfo">Who's That Pokemon?</button>
+    <button class="btn-danger" id="getRandomPokemon">Random Pokemon</button>
+    <div class="showErrors"></div>
+    <div class="showName"></div>
+    <div class="showSprite"></div>
+  </div>
+</body>
+</html>
