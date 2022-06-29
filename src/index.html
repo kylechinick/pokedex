@@ -3,6 +3,14 @@
   <title>PokeDex Beta</title>
 </head>
 <body>
+  <header>
+    <div id="top-left-lights-group">
+      <div id="circle--large--blue"></div>
+      <div id="circle--small--red"></div>
+      <div id="circle--small--yellow"></div>
+      <div id="circle--small--green"></div>
+    </div>
+  </header>
   <div class="container">
     <h1>PokeDex Beta</h1>
     <!-- <label for="name">Enter a name:</label>
@@ -13,9 +21,30 @@
     </datalist>
     <button class="btn-secondary" id="pokemonInfo">Who's That Pokemon?</button>
     <button class="btn-danger" id="getRandomPokemon">Random Pokemon</button>
+
     <div class="showErrors"></div>
-    <div class="showName"></div>
-    <div class="showSprite"></div>
+
+    <div id="pokedex-display">
+     
+      <div id="pokedex-display--top-dots-container">
+        <div class="pokedex-display--top-dot"></div>
+        <div class="pokedex-display--top-dot"></div>
+      </div>
+
+      <div id="pokedex-display--screen">
+        <div class="showName"></div>
+        <div class="showType"></div>
+        <div class="showGen"></div>
+        <div class="showSprite"></div>
+        <div class="showShinySprite"></div>
+      </div>
+      <div id="pokedex-display--bottom-row">
+        <div id="pokedex-display__vent">
+          <div class="pokedex-display__vent--line"></div>
+        </div>
+      </div>
+       
+    </div>
   </div>
 </body>
 </html>

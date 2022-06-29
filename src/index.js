@@ -6,11 +6,28 @@ import PokemonService from './pokemon-service.js';
 
 function getElements(response) {
   if (response.species) {
-    $('.showName').text(response.species.name);
+    let pokemonName = response.species.name;
+    pokemonName = pokemonName[0].toUpperCase() + pokemonName.slice(1);
+    $('.showName').text(pokemonName);
+
+    // get types and put them in ul
+    let types = document.createElement('ul');
+    response.types.forEach(function(element) {
+      let type = document.createElement('li');
+      type.innerText = element.type.name;
+      types.appendChild(type);
+    });
+    $('.showType').html("");
+    $('.showType').html(types);
+
     let sprite = document.createElement('img');
+    let shiny = document.createElement('img');
     $(sprite).prop('src', response.sprites.front_default);
+    $(shiny).prop('src', response.sprites.front_shiny);
     $('.showSprite').html("");
     $('.showSprite').append(sprite);
+    $('.showShinySprite').html("");
+    $('.showShinySprite').append(shiny);
   } else {
     $('.showErrors').text(`There was an error: ${response}`);
   }
@@ -37,25 +54,16 @@ function populateNames(response) {
   });
 }
 
-function showPokemon(name) {
-  $('.showName').text(name);
-  // let sprite = document.createElement('img');
-  // $(sprite).prop('src', sprites.front_default);
-  // $('.showSprite').html("");
-  // $('.showSprite').append(sprite);
-}
-
 function randomMon(genList) {
   let randomGen = Math.floor(Math.random() * genList.length);
   let randomPokemon = Math.floor(Math.random() * genList[randomGen].length);
   const selectedPokemon = genList[randomGen][randomPokemon];
 
-  // showPokemon(selectedPokemon.name);
   getPokeByName(selectedPokemon.name);
 }
 
 $(document).ready(function() {
-  const srchGenUpTo = 8;
+  const srchGenUpTo = 2;
   const allPokemons = [];
   for (let i = 1; i <= srchGenUpTo; i++) {
     getAllGenMons(i, allPokemons);
