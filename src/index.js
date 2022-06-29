@@ -21,9 +21,10 @@ async function getPokeByName(name) {
   getElements(response);
 }
 
-async function getAllGenMons(genNumber) {
+async function getAllGenMons(genNumber, allPokemons) {
   const response = await PokemonService.getPokemonByGen(genNumber);
   populateNames(response);
+  allPokemons.push(response.pokemon_species);
 }
 
 function populateNames(response) {
@@ -36,25 +37,36 @@ function populateNames(response) {
   });
 }
 
-// Array.prototype.random = function() {
-//   return this[Math.random]
-// }
-function randomMon(response) {
-  const pokemonArray = response.pokemon_species;
+function showPokemon(name, sprites) {
+  $('.showName').text(name);
+  let sprite = document.createElement('img');
+  $(sprite).prop('src', sprites.front_default);
+  $('.showSprite').html("");
+  $('.showSprite').append(sprite);
+}
+
+function randomMon(pokemonList) {
+  // random number generation
+  // random pokemon from that generation
+
   const list = $('#pokemons');
     let randomMon = (Math.floor(Math.random()*pokemonArray.length))
     list.append(pokemonArray[randomMon])
-  };
-
-
+}
 
 $(document).ready(function() {
   const srchGenUpTo = 8;
+  const allPokemons = [];
   for (let i = 1; i <= srchGenUpTo; i++) {
-    getAllGenMons(i);
+    getAllGenMons(i, allPokemons);
   }
+
   $('#pokemonInfo').on('click', function() {
     const name = $('#nameAuto').val();
     getPokeByName(name);
   });
+  $('#getRandomPokemon').on('click', function() {
+    randomMon(allPokemons);
+  });
+  
 });
