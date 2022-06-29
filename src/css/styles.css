@@ -84,7 +84,7 @@ body {
 #pokedex-display__vent {
   display: flex;
   flex-direction: column;
-  background-color: greenyellow;
+
 }
 
 .pokedex-display__vent--line {
