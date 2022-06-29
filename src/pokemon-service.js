@@ -13,6 +13,7 @@ export default class PokemonService {
   static async getPokemonByGen(number) {
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/generation/${number}`);
+      // const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${randomNumber}`);
       if (!response.ok) {
         throw Error(response.statusText);
       }

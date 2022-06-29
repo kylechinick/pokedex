@@ -37,21 +37,21 @@ function populateNames(response) {
   });
 }
 
-function showPokemon(name, sprites) {
+function showPokemon(name) {
   $('.showName').text(name);
-  let sprite = document.createElement('img');
-  $(sprite).prop('src', sprites.front_default);
-  $('.showSprite').html("");
-  $('.showSprite').append(sprite);
+  // let sprite = document.createElement('img');
+  // $(sprite).prop('src', sprites.front_default);
+  // $('.showSprite').html("");
+  // $('.showSprite').append(sprite);
 }
 
-function randomMon(pokemonList) {
-  // random number generation
-  // random pokemon from that generation
+function randomMon(genList) {
+  let randomGen = Math.floor(Math.random() * genList.length);
+  let randomPokemon = Math.floor(Math.random() * genList[randomGen].length);
+  const selectedPokemon = genList[randomGen][randomPokemon];
 
-  const list = $('#pokemons');
-    let randomMon = (Math.floor(Math.random()*pokemonArray.length))
-    list.append(pokemonArray[randomMon])
+  // showPokemon(selectedPokemon.name);
+  getPokeByName(selectedPokemon.name);
 }
 
 $(document).ready(function() {
