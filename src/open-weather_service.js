@@ -10,9 +10,20 @@ export default class OpenWeatherService {
       return error.message;
     }
   }
+  static async get16DayForecast() {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=portland,oregon&cnt=3&appid=46ec625f0017a461c68de06748c4edcc`);
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response.json();
+  } catch(error) {
+    return error.message;
+  }
 }
-
 
 
 // api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt={cnt}&appid={API key}
 
+// api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={API key}
+
+// api.openweathermap.org/data/2.5/forecast/?q=portland,us&cnt=8&appid=46ec625f0017a461c68de06748c4edcc

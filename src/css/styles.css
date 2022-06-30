@@ -8,6 +8,12 @@ body {
   padding: 1rem;
 }
 
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 #circle--large--blue {
   width: 100px;
   height: 100px;
@@ -168,9 +174,11 @@ body {
 }
 
 .right-side__top-screen {
+  width: 400px;
+  margin: 1rem 2rem;
   padding: .5rem;
   background-color: #000;
   color: #33FF33;
   min-height: 250px;
-  /* border-radius: ; */
+  border-radius: 6px;
 }

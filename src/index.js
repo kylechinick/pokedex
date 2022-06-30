@@ -141,10 +141,25 @@ async function displayWeather() {
   $('#current-temperature').text(temperatureData);
 }
 
+async function displayForecast() {
+  const response = await OpenWeatherService.get16DayForecast();
+  console.log(response);
+  const forecasts = response.list;
+  forecasts.forEach(function(element) {
+    let day = document.createElement('li');
+    let temp = 1.8 * (element.main.temp - 273) + 32;
+    day.innerText = (temp + "").substring(0, 4) + "℉";
+    $('#forecast').append(day);
+  });
+}
 
+// Kyle's Conversion Function:
+// function convertKelvinToFahrenheit(kelvinValue) {
+//   return parseFloat((((kelvinValue - 273.15) * 9) / 5 + 32).toFixed(0));
+// }
 
 $(document).ready(function() {
-  const srchGenUpTo = 2;
+  const srchGenUpTo = 8;
   const allPokemons = [];
   for (let i = 1; i <= srchGenUpTo; i++) {
     getAllGenMons(i, allPokemons);
@@ -161,5 +176,5 @@ $(document).ready(function() {
   });
 
   displayWeather();
-
+  displayForecast();
 });
