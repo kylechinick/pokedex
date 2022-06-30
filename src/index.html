@@ -1,6 +1,6 @@
 <html lang="en-US">
 <head>
-  <title>PokeDex Beta</title>
+  <title>PokéDex Beta</title>
 </head>
 <body>
   <header>
@@ -12,15 +12,15 @@
     </div>
   </header>
   <div class="container">
-    <h1>PokeDex Beta</h1>
+    <h1>PokéDex Beta</h1>
     <!-- <label for="name">Enter a name:</label>
     <input id="name" type="text"> -->
-    <label for="nameAuto">Enter a name(beta):</label>
+    <label for="nameAuto">Enter a name:</label>
     <input list="pokemons" name="pokemon" id="nameAuto" type="text">
     <datalist id="pokemons">
     </datalist>
-    <button class="btn-secondary" id="pokemonInfo">Who's That Pokemon?</button>
-    <button class="btn-danger" id="getRandomPokemon">Random Pokemon</button>
+    <button class="btn-secondary" id="pokemonInfo">Who's That Pokémon?</button>
+    <button class="btn-danger" id="getRandomPokemon">Random Pokémon</button>
 
     <div class="showErrors"></div>
 
@@ -34,6 +34,7 @@
       <div id="pokedex-display--screen">
         <div class="showName"></div>
         <div class="showMisc"></div>
+        <div class="showEgg"></div>
         <div class="showType"></div>
         <div class="showGen"></div>
         <div class="showFlavor"></div>
@@ -51,6 +52,11 @@
         
       </div>
        
+    </div>
+  </div>
+  <div class="pokedex__right-side">
+    <div class="right-side__top-screen">
+      <p>Current Temperature: <span id="current-temperature"></span>&#8457;</p>
     </div>
   </div>
 </body>
