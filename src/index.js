@@ -14,20 +14,60 @@ function getElements(response) {
     let types = document.createElement('ul');
     response.types.forEach(function(element) {
       let type = document.createElement('li');
+      element.type.name = element.type.name[0].toUpperCase() + element.type.name.slice(1);
       type.innerText = element.type.name;
       types.appendChild(type);
     });
     $('.showType').html("");
     $('.showType').html(types);
-
+    
     let sprite = document.createElement('img');
+    sprite.className = 'sprites';
     let shiny = document.createElement('img');
+    shiny.className = 'sprites';
     $(sprite).prop('src', response.sprites.front_default);
     $(shiny).prop('src', response.sprites.front_shiny);
-    $('.showSprite').html("");
-    $('.showSprite').append(sprite);
-    $('.showShinySprite').html("");
-    $('.showShinySprite').append(shiny);
+    $('.showSprites').html("");
+    $('.showSprites').append(sprite);
+    $('.showSprites').append(shiny);
+  } else {
+    $('.showErrors').text(`There was an error: ${response}`);
+  }
+}
+
+function populateSpeciesInfo(response) {
+  if (response.name) {
+    let enText = "";
+    const flavorTexts = response.flavor_text_entries;
+    for (let i = flavorTexts.length - 1; i > 0; i--) {
+      if (flavorTexts[i].language.name === 'en') {
+        enText = flavorTexts[i].flavor_text;
+        // copied from https://stackoverflow.com/questions/10430562/how-do-you-remove-unicode-characters-in-javascript
+        enText = enText.replace(/[\uE000-\uF8FF]/g, '');
+        break;
+      }
+    }
+    $('.showFlavor').text("");
+    $('.showFlavor').text(enText);
+
+    let enGenus = "";
+    const generaTexts = response.genera;
+    for (let i = 0; i < generaTexts.length; i++) {
+      if (generaTexts[i].language.name === 'en') {
+        enGenus = generaTexts[i].genus;
+        break;
+      }
+    }
+    let firstAppear = document.createElement('p');
+    let fASplit = response.generation.name.split('-');
+    fASplit[0] = 'Generation';
+    fASplit[1] = fASplit[1].toUpperCase();
+    firstAppear.innerText = fASplit.join('-');
+    console.log(firstAppear);
+
+    $('.showMisc').html("");
+    $('.showMisc').append(enGenus);
+    $('.showMisc').append(firstAppear);
   } else {
     $('.showErrors').text(`There was an error: ${response}`);
   }
@@ -36,6 +76,11 @@ function getElements(response) {
 async function getPokeByName(name) {
   const response = await PokemonService.getPokemonByName(name);
   getElements(response);
+}
+
+async function getPokeSpeciesInfo(name) {
+  const response = await PokemonService.getPokemonSpeciesInfo(name);
+  populateSpeciesInfo(response);
 }
 
 async function getAllGenMons(genNumber, allPokemons) {
@@ -59,7 +104,12 @@ function randomMon(genList) {
   let randomPokemon = Math.floor(Math.random() * genList[randomGen].length);
   const selectedPokemon = genList[randomGen][randomPokemon];
 
-  getPokeByName(selectedPokemon.name);
+  fillPokemonInfo(selectedPokemon.name);
+}
+
+function fillPokemonInfo(name) {
+  getPokeByName(name);
+  getPokeSpeciesInfo(name);
 }
 
 $(document).ready(function() {
@@ -71,7 +121,9 @@ $(document).ready(function() {
 
   $('#pokemonInfo').on('click', function() {
     const name = $('#nameAuto').val();
-    getPokeByName(name);
+    if (name.length !== 0) {
+      fillPokemonInfo(name);
+    }
   });
   $('#getRandomPokemon').on('click', function() {
     randomMon(allPokemons);
