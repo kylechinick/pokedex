@@ -11,15 +11,19 @@
         <div id="circle--small--green"></div>
       </div>
     </header>
-    <h1>PokéDex Beta</h1>
-    <label for="nameAuto">Enter a name:</label>
-    <input list="pokemons" name="pokemon" id="nameAuto" type="text" />
-    <datalist id="pokemons"> </datalist>
-    <button class="btn-secondary" id="pokemonInfo">Who's That Pokémon?</button>
-    <button class="btn-danger" id="getRandomPokemon">Random Pokémon</button>
+    <div class="hero-lockup">
+      <h1>PokéDex Beta</h1>
+      <label for="nameAuto">Enter a name:</label>
+      <input list="pokemons" name="pokemon" id="nameAuto" type="text" />
+      <datalist id="pokemons"> </datalist>
+      <button class="btn-secondary" id="pokemonInfo">
+        Who's That Pokémon?
+      </button>
+      <button class="btn-danger" id="getRandomPokemon">Random Pokémon</button>
+    </div>
 
     <main>
-      <div class="pokedex__left-side">
+      <div id="pokedex__left-side">
         <div id="pokedex-display">
           <div id="pokedex-display--top-row">
             <div class="pokedex-display--top-dot"></div>
@@ -48,7 +52,7 @@
           </div>
         </div>
       </div>
-      <div class="pokedex__right-side">
+      <div id="pokedex__right-side">
         <div class="right-side__top-screen">
           <p>
             Current Temperature: <span id="current-temperature"></span>&#8457;
