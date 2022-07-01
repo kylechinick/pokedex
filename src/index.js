@@ -7,30 +7,32 @@ import OpenWeatherService from './open-weather_service.js';
 
 function getElements(response) {
   if (response.species) {
-    // add name to screen
     let pokemonName = response.species.name;
     pokemonName = pokemonName[0].toUpperCase() + pokemonName.slice(1);
+
     $('.showName').text(pokemonName);
 
-    // add types to screen
     let types = document.createElement('ul');
-    response.types.forEach(function(element) {
+
+    response.types.forEach(function (element) {
       let type = document.createElement('li');
-      element.type.name = element.type.name[0].toUpperCase() + element.type.name.slice(1);
+      element.type.name =
+        element.type.name[0].toUpperCase() + element.type.name.slice(1);
       type.innerText = element.type.name;
       types.appendChild(type);
     });
-    $('.showType').html("");
+
+    $('.showType').html('');
     $('.showType').html(types);
-    
-    // add sprite to screen
+
     let sprite = document.createElement('img');
     sprite.className = 'sprites';
     let shiny = document.createElement('img');
     shiny.className = 'sprites';
     $(sprite).prop('src', response.sprites.front_default);
     $(shiny).prop('src', response.sprites.front_shiny);
-    $('.showSprites').html("");
+
+    $('.showSprites').html('');
     $('.showSprites').append(sprite);
     $('.showSprites').append(shiny);
   } else {
@@ -40,56 +42,55 @@ function getElements(response) {
 
 function populateSpeciesInfo(response) {
   if (response.name) {
-    // add flavor text to screen
-    let enText = "";
+    let enText = '';
     const flavorTexts = response.flavor_text_entries;
-    // checks for the newest addition of flavor text
+
     for (let i = flavorTexts.length - 1; i > 0; i--) {
       if (flavorTexts[i].language.name === 'en') {
         enText = flavorTexts[i].flavor_text;
-        // copied from https://stackoverflow.com/questions/10430562/how-do-you-remove-unicode-characters-in-javascript
         enText = enText.replace(/[\uE000-\uF8FF]/g, '');
         break;
       }
     }
-    $('.showFlavor').text("");
+
+    $('.showFlavor').text('');
     $('.showFlavor').text(enText);
 
-    // add generation and genus to screen
-    let enGenus = "";
+    let enGenus = '';
     const generaTexts = response.genera;
+
     for (let i = 0; i < generaTexts.length; i++) {
       if (generaTexts[i].language.name === 'en') {
         enGenus = generaTexts[i].genus;
         break;
       }
     }
+
     let firstAppear = document.createElement('p');
     let fASplit = response.generation.name.split('-');
     fASplit[0] = 'Generation';
     fASplit[1] = fASplit[1].toUpperCase();
     firstAppear.innerText = fASplit.join('-');
 
-    $('.showMisc').html("");
+    $('.showMisc').html('');
     $('.showMisc').append(enGenus);
     $('.showMisc').append(firstAppear);
 
-    // Add egg type to screen
-    let enEgg = "";
+    let enEgg = '';
     const eggTypeArray = response.egg_groups;
 
     for (let i = 0; i < eggTypeArray.length; i++) {
       let eggType = eggTypeArray[i].name;
       eggType = eggType[0].toUpperCase() + eggType.slice(1);
-      enEgg += eggType + " ";
+      enEgg += eggType + ' ';
     }
-    $('.showEgg').text("");
-    $('.showEgg').text("Egg Type: " + enEgg);
+
+    $('.showEgg').text('');
+    $('.showEgg').text('Egg Type: ' + enEgg);
   } else {
     $('.showErrors').text(`There was an error: ${response}`);
   }
 }
-
 
 async function getPokeByName(name) {
   const response = await PokemonService.getPokemonByName(name);
@@ -107,15 +108,10 @@ async function getAllGenMons(genNumber, allPokemons) {
   allPokemons.push(response.pokemon_species);
 }
 
-async function getPokemonByEggs(egg) {
-  const response = await PokemonService.getPokemonByEggs(egg);
-  // populateEgg(response);
-}
-
 function populateNames(response) {
   const pokemonArray = response.pokemon_species;
   const list = $('#pokemons');
-  pokemonArray.forEach(function(pokemon) {
+  pokemonArray.forEach(function (pokemon) {
     let option = $(document.createElement('option'));
     option.val(pokemon.name);
     list.append(option);
@@ -145,10 +141,10 @@ async function displayForecast() {
   const response = await OpenWeatherService.get16DayForecast();
   console.log(response);
   const forecasts = response.list;
-  forecasts.forEach(function(element) {
+  forecasts.forEach(function (element) {
     let day = document.createElement('li');
     let temp = 1.8 * (element.main.temp - 273) + 32;
-    day.innerText = (temp + "").substring(0, 4) + "℉";
+    day.innerText = (temp + '').substring(0, 4) + '℉';
     $('#forecast').append(day);
   });
 }
@@ -158,20 +154,20 @@ async function displayForecast() {
 //   return parseFloat((((kelvinValue - 273.15) * 9) / 5 + 32).toFixed(0));
 // }
 
-$(document).ready(function() {
+$(document).ready(function () {
   const srchGenUpTo = 8;
   const allPokemons = [];
   for (let i = 1; i <= srchGenUpTo; i++) {
     getAllGenMons(i, allPokemons);
   }
 
-  $('#pokemonInfo').on('click', function() {
+  $('#pokemonInfo').on('click', function () {
     const name = $('#nameAuto').val();
     if (name.length !== 0) {
       fillPokemonInfo(name);
     }
   });
-  $('#getRandomPokemon').on('click', function() {
+  $('#getRandomPokemon').on('click', function () {
     randomMon(allPokemons);
   });
 

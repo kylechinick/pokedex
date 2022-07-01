@@ -1,67 +1,63 @@
 <html lang="en-US">
-<head>
-  <title>PokéDex Beta</title>
-</head>
-<body>
-  <header>
-    <div id="top-left-lights-group">
-      <div id="circle--large--blue"></div>
-      <div id="circle--small--red"></div>
-      <div id="circle--small--yellow"></div>
-      <div id="circle--small--green"></div>
-    </div>
-  </header>
-  <h1>PokéDex Beta</h1>
-      <!-- <label for="name">Enter a name:</label>
-      <input id="name" type="text"> -->
-      <label for="nameAuto">Enter a name:</label>
-      <input list="pokemons" name="pokemon" id="nameAuto" type="text">
-      <datalist id="pokemons">
-      </datalist>
-      <button class="btn-secondary" id="pokemonInfo">Who's That Pokémon?</button>
-      <button class="btn-danger" id="getRandomPokemon">Random Pokémon</button>
-  
-      <div class="showErrors"></div>
-  <main>
-    <div class="pokedex__left-side">
-      
-  
-      <div id="pokedex-display">
-       
-        <div id="pokedex-display--top-row">
-          <div class="pokedex-display--top-dot"></div>
-          <div class="pokedex-display--top-dot"></div>
-        </div>
-  
-        <div id="pokedex-display--screen">
-          <div class="showName"></div>
-          <div class="showMisc"></div>
-          <div class="showEgg"></div>
-          <div class="showType"></div>
-          <div class="showGen"></div>
-          <div class="showFlavor"></div>
-          <div class="showSprites"></div>
-        </div>
-  
-        <div id="pokedex-display--bottom-row">
-          <div id="pokedex-display__hole-punch"></div>
-          <div id="pokedex-display__vent">
-            <div class="pokedex-display__vent--line"></div>
-            <div class="pokedex-display__vent--line"></div>
-            <div class="pokedex-display__vent--line"></div>
-            <div class="pokedex-display__vent--line"></div>
+  <head>
+    <title>PokéDex Beta</title>
+  </head>
+  <body>
+    <header>
+      <div id="top-left-lights-group">
+        <div id="circle--large--blue"></div>
+        <div id="circle--small--red"></div>
+        <div id="circle--small--yellow"></div>
+        <div id="circle--small--green"></div>
+      </div>
+    </header>
+    <h1>PokéDex Beta</h1>
+    <label for="nameAuto">Enter a name:</label>
+    <input list="pokemons" name="pokemon" id="nameAuto" type="text" />
+    <datalist id="pokemons"> </datalist>
+    <button class="btn-secondary" id="pokemonInfo">Who's That Pokémon?</button>
+    <button class="btn-danger" id="getRandomPokemon">Random Pokémon</button>
+
+    <main>
+      <div class="pokedex__left-side">
+        <div id="pokedex-display">
+          <div id="pokedex-display--top-row">
+            <div class="pokedex-display--top-dot"></div>
+            <div class="pokedex-display--top-dot"></div>
+          </div>
+
+          <div id="pokedex-display--screen">
+            <div class="showErrors"></div>
+            <div class="showName"></div>
+            <div class="showMisc"></div>
+            <div class="showEgg"></div>
+            <div class="showType"></div>
+            <div class="showGen"></div>
+            <div class="showFlavor"></div>
+            <div class="showSprites"></div>
+          </div>
+
+          <div id="pokedex-display--bottom-row">
+            <div id="pokedex-display__hole-punch"></div>
+            <div id="pokedex-display__vent">
+              <div class="pokedex-display__vent--line"></div>
+              <div class="pokedex-display__vent--line"></div>
+              <div class="pokedex-display__vent--line"></div>
+              <div class="pokedex-display__vent--line"></div>
+            </div>
           </div>
         </div>
-  
       </div>
-    </div>
-    <div class="pokedex__right-side">
-      <div class="right-side__top-screen">
-        <p>Current Temperature: <span id="current-temperature"></span>&#8457;</p>
-        <ul id="forecast">Forecast:</ul>
+      <div class="pokedex__right-side">
+        <div class="right-side__top-screen">
+          <p>
+            Current Temperature: <span id="current-temperature"></span>&#8457;
+          </p>
+          <ul id="forecast">
+            Forecast:
+          </ul>
+        </div>
       </div>
-    </div>
-  </main>
-  
-</body>
+    </main>
+  </body>
 </html>
